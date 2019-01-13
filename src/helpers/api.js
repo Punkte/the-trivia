@@ -1,7 +1,8 @@
 class api {
   async getCategories() {
-    const response = await fetch('http://jservice.io/api/categories?count=100');
+    const response = await fetch('http://jservice.io/api/categories?count=10');
     const json = await response.json();
+    console.log(json)
     return json;  
   }
   async getCategoryById(id) {
