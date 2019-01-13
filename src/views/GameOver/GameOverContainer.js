@@ -16,12 +16,12 @@ class GameOverContainer extends Component {
 	}
 
 	render() {
-		return ( 
+		return (
 			<Gameover
 				resetGame={ this.resetGame }
 				score={ this.state.score }
 			/>
 		)
 	}
-} 
+}
 export default GameOverContainer
