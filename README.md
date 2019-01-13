@@ -4,7 +4,7 @@ In the project directory, you have to run:
 
 ### `npm install`
 
-It install all the dev-dependencies<br/>
+It will install all the dev-dependencies<br/>
 
 ### `npm start`
 
