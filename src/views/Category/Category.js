@@ -32,7 +32,11 @@ const Category = ({ category,
       <form onSubmit={ handleSubmit }>
         <h1>You choosed: { category.title }</h1>
         life: { life }<br/>
-        score : { score }<br/>
+        score : { score } { (score !== 0 && score % 10 === 0) && (
+          <div>
+            T'es un winner continue comme ca
+          </div>
+        )} <br/>
         categoryScore: { categoryScore }
         <div className="question">
           <h3 className="question__title">
