@@ -6,9 +6,11 @@ import game from '../../helpers/storage'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faHeart, faQuestion } from '@fortawesome/free-solid-svg-icons'
-import { Header, Info } from './styled'
+import { Header, Info, ListContainer, ListItem } from './styled'
 
 library.add(faGamepad, faHeart, faQuestion )
+
+
 
 
 const Home = ({ categories, filter, playedMessage }) => (
@@ -22,7 +24,9 @@ const Home = ({ categories, filter, playedMessage }) => (
           <div title="Global score">
             <FontAwesomeIcon icon="gamepad" /> Global score : { game.getItem( 'life' ) } { (game.getItem( 'life' ) !== 0 && game.getItem( 'life' ) % 10 === 0) && (  // if the score is a multiple of ten
               <span>
-                T'es un winner continue comme ca
+                { /* Begin French touch */ }
+                T'es un winner continue comme ça mon pote plus que 10
+                { /* End French touch */ }
               </span>
             )} <br/>
           </div>
@@ -36,20 +40,26 @@ const Home = ({ categories, filter, playedMessage }) => (
       )
     }
     { categories.length > 0 && (
-      <section>
+      <ListContainer>
         {categories.map(category => (
-          <div 
-            played={ filter.includes( category.id ) ? 'true' : 'false' }
-            key={category.id}
-          >
-            <Link 
-              to={`/categories/${category.id}`} 
-            >
-              {category.title}
-            </Link>
+          <div key={category.id}>
+            { !filter.includes( category.id ) 
+            ? (
+              <ListItem key={category.id}>
+                <Link 
+                  to={`/categories/${category.id}`} 
+                >
+                  {category.title}
+                </Link>
+              </ListItem>
+            )
+            : (
+              <ListItem key={category.id} played><span>{category.title}</span></ListItem>
+            )
+          }
           </div>
         ))}
-      </section>
+      </ListContainer>
     )}
   </section>
 );

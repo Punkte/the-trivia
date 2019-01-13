@@ -9,10 +9,15 @@ class HomeContainer extends Component {
 	
 	constructor( props ) {
 		super( props )
-		if( this.props.location ) {
+		if( this.props.location.state ) {
+			console.log(this.props)
 			this.state = {
 				categories: [],
-				playedMessage: false
+				playedMessage: true
+			}
+		}else {
+			this.state = {
+				categories: [],
 			}
 		}
 	}
