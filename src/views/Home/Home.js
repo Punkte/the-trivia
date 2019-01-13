@@ -5,7 +5,7 @@ import game from '../../helpers/storage'
 
 const Home = ({ categories, filter, playedMessage }) => (
   <section>
-    <h1>Homepage</h1>
+    <h1>The Trivia</h1>
     <p>
       Your score : { game.getItem('score') }<br/>
       Your life : { game.getItem( 'life' ) }

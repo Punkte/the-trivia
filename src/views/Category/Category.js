@@ -1,6 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+
 
 const Category = ({ category,
   currentQuestionIndex,
@@ -8,11 +10,25 @@ const Category = ({ category,
   $input,
   life,
   score,
-  categoryScore
+  categoryScore,
+  resetGame
 }) => {
+  const ResetButton = withRouter(({ history }) => (
+    <button
+        onClick={() => { 
+            history.push('/') 
+            resetGame()
+        }}
+    >
+    Reset Game
+    </button>
+  ))
   const currentQuestion = category.clues[currentQuestionIndex]
   return (
     <section>
+      <Link to={'/'}>
+        return to home
+      </Link>
       <form onSubmit={ handleSubmit }>
         <h1>You choosed: { category.title }</h1>
         life: { life }<br/>
@@ -30,6 +46,7 @@ const Category = ({ category,
           </button>
         </div>
       </form>
+      <ResetButton />
     </section>
   )
 }

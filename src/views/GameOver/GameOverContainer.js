@@ -11,7 +11,7 @@ class GameOverContainer extends Component {
 	}
 
 	resetGame() {
-		console.log('clear')
+		console.clear()
 		game.clearGame()
 	}
 

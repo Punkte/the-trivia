@@ -28,9 +28,7 @@ class CategoryContainer extends Component {
 		const score = game.getItem('score')
 		const life = game.getItem('life')
 		const categoryScore = this.getCategoryInfoById( data.id ).score ? this.getCategoryInfoById( data.id ).score : 0
-		console.log(categoryScore)
 		const currentQuestion = this.getCategoryInfoById( data.id ).questions ? this.getCategoryInfoById( data.id ).questions : 0
-		console.log(currentQuestion)
 		this.setState({
 			category: data,
 			score, 
@@ -41,13 +39,13 @@ class CategoryContainer extends Component {
 	}
 	componentDidUpdate() {
 		// open the console to cheat
-		this.state.category.clues[this.state.currentQuestion] && console.log( this.state.category.clues[this.state.currentQuestion].answer )
+		(this.state.category && this.state.category.clues && this.state.category.clues[this.state.currentQuestion]) && console.log( '%c' + this.state.category.clues[this.state.currentQuestion].answer, 'background: #222; color: #bada55' )
 	}
 
 
 	/**
-	 * Category Score getter 
-	 * @param {Integer} id 
+	 * Category Info getter 
+	 * @param {Number} id 
 	 */
 	getCategoryInfoById( id ) {
 		const categoriesState = game.getItem( 'categoriesState' )
@@ -57,6 +55,11 @@ class CategoryContainer extends Component {
 		return false
 	}
 
+	/**
+	 * Category Info setter
+	 * @param {Number} id 
+	 * @param {Object} obj 
+	 */
 	setCategoryInfoById( id, obj ) {
 		const info = game.getItem( 'categoriesState' )
 		info[id] = {
@@ -66,8 +69,15 @@ class CategoryContainer extends Component {
 	}
 
 	/**
+	 * Reset the game
+	 */
+	resetGame = () => {
+		game.clearGame()
+	}
+
+	/**
 	 * Form submit handler
-	 * @param {Event} e
+	 * @param {HTMLEvent} e
 	 */
 	handleSubmit = e => {
 		e.preventDefault()
@@ -79,27 +89,22 @@ class CategoryContainer extends Component {
 		// increment score somewhere and redirect to /
 
 		const answer = this.$input.value
+		let categoryScore = this.state.categoryScore 
+		const categoryQuestion = this.state.currentQuestion + 1
 		if( answer === this.state.category.clues[this.state.currentQuestion].answer ) {
-			console.log( 'GOOD!, increment score' )
+			console.log( 'GOOD!' )
 			let score = game.getItem('score')
 			score = score + 1
-			const categoryScore = this.state.categoryScore + 1
-			const categoryQuestion = this.state.currentQuestion + 1
+			categoryScore = this.state.categoryScore + 1
 			this.setState(prevState => ({ 
 				score,
 				categoryScore
-			}), () => {
-				const categoryInfo = {
-					score: categoryScore,
-					questions: categoryQuestion
-				}
-				this.setCategoryInfoById( this.state.category.id, categoryInfo )
-			}) 
+			})) 
 
 			game.setItem( 'score', score ) // updating the score in the localStorage
 
 		}else {
-			console.log('WRONG ANSWER, DECREMENT SCORE')
+			console.log('WRONG ANSWER')
 			let life = game.getItem( 'life' )
 			life -= 1
 			if( life <= 0 ) {
@@ -110,6 +115,11 @@ class CategoryContainer extends Component {
 		}
 
 		// saving the questionID and category score in localStorage
+		const categoryInfo = {
+			score: categoryScore,
+			questions: categoryQuestion
+		}
+		this.setCategoryInfoById( this.state.category.id, categoryInfo )
 
 
 		this.$input.value = ""
@@ -141,11 +151,11 @@ class CategoryContainer extends Component {
 			currentQuestion,
 			score, 
 			categoryScore,
-			life
+			life,
 		} = this.state
 		// at first render, category will be null so we need to wait
 		// before using data.
-		if (!category) return <div>Please wait...</div>
+		if ( !category ) return <div>Please wait...</div>
 		if( this.state.gameOver ) return <GameOverContainer />
 		if( currentQuestion === category.clues_count ) {
 			return (
@@ -165,6 +175,7 @@ class CategoryContainer extends Component {
 				categoryScore={ categoryScore }
 				handleSubmit = { this.handleSubmit }
 				
+				resetGame={ this.resetGame }
 				$input={ input => (this.$input = input)}
 			/>
 		)

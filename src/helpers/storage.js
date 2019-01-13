@@ -65,5 +65,5 @@ class storage {
 
 }
 let game = new storage( 'game' )
-
+export { storage }
 export default game
