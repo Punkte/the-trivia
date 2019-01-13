@@ -12,7 +12,7 @@ class HomeContainer extends Component {
 		if( this.props.location ) {
 			this.state = {
 				categories: [],
-				playedMessage: true
+				playedMessage: false
 			}
 		}
 	}

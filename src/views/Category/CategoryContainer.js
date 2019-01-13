@@ -173,8 +173,8 @@ class CategoryContainer extends Component {
 				life={ life }
 				score={ score }
 				categoryScore={ categoryScore }
-				handleSubmit = { this.handleSubmit }
 				
+				handleSubmit = { this.handleSubmit }
 				resetGame={ this.resetGame }
 				$input={ input => (this.$input = input)}
 			/>
