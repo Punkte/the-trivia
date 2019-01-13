@@ -46,8 +46,10 @@ const Category = ({ category,
           <div title="Global score">
             <FontAwesomeIcon icon="gamepad" /> Global score : { score } { (score !== 0 && score % 10 === 0) && (  // if the score is a multiple of ten
               <span>
-                T'es un winner continue comme ca
-              </span>
+              { /* Begin French touch */ }
+              T'es un winner continue comme ça mon pote plus que 10
+              { /* End French touch */ }
+            </span>
             )} <br/>
 
           </div>

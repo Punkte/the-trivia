@@ -22,13 +22,7 @@ const Home = ({ categories, filter, playedMessage }) => (
             <FontAwesomeIcon icon="heart" /> Life : { game.getItem('score') }<br/>
           </div>
           <div title="Global score">
-            <FontAwesomeIcon icon="gamepad" /> Global score : { game.getItem( 'life' ) } { (game.getItem( 'life' ) !== 0 && game.getItem( 'life' ) % 10 === 0) && (  // if the score is a multiple of ten
-              <span>
-                { /* Begin French touch */ }
-                T'es un winner continue comme ça mon pote plus que 10
-                { /* End French touch */ }
-              </span>
-            )} <br/>
+            <FontAwesomeIcon icon="gamepad" /> Global score : { game.getItem( 'life' ) }<br/>
           </div>
         </Info>
     </Header>
