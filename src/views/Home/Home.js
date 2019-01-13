@@ -19,10 +19,10 @@ const Home = ({ categories, filter, playedMessage }) => (
       <h1>The Trivia</h1>
       <Info>
           <div title="Global life">
-            <FontAwesomeIcon icon="heart" /> Life : { game.getItem('score') }<br/>
+            <FontAwesomeIcon icon="heart" /> Life : { game.getItem('life') }<br/>
           </div>
           <div title="Global score">
-            <FontAwesomeIcon icon="gamepad" /> Global score : { game.getItem( 'life' ) }<br/>
+            <FontAwesomeIcon icon="gamepad" /> Global score : { game.getItem( 'score' ) }<br/>
           </div>
         </Info>
     </Header>
